@@ -1,40 +1,36 @@
 #!/usr/bin/env ruby
 
-require 'fileutils'
 require_relative '../lib/portlet_generator/portlet'
 require_relative '../lib/portlet_generator/generator'
-
-FileUtils.rm_rf '../output'
 
 command = ARGV[0]
 default_class_name = ARGV[1]
 if default_class_name
   default_portlet_title = default_class_name.split(/(?=[A-Z])/).join(' ')
 end
+force_defaults = ARGV[2] == '-f'
 
 case command
 when 'generate', 'g'
-  puts 'Portlet Generator'
+  puts 'Portlet Generator' unless force_defaults
 
   if default_portlet_title
-    print "Portlet Title (default: #{default_portlet_title}): "
+    print "Portlet Title (default: #{default_portlet_title}): " unless force_defaults
   else
-    print 'Portlet Title: '
+    print 'Portlet Title: ' unless force_defaults
   end
-  portlet_title = $stdin.gets.chomp
+  portlet_title = force_defaults ? '' : $stdin.gets.chomp
   portlet_title = default_portlet_title if portlet_title.empty?
 
   default_class_name ||= portlet_title.gsub(' ', '')
   default_portlet_id = portlet_title.downcase.gsub(' ', '-')
 
-  print "Class Name (default: #{default_class_name}): "
-  class_name = $stdin.gets.chomp
-
+  print "Class Name (default: #{default_class_name}): " unless force_defaults
+  class_name = force_defaults ? '' : $stdin.gets.chomp
   class_name = default_class_name if class_name.empty?
 
-  print "Portlet ID (default: #{default_portlet_id}): "
-  portlet_id = $stdin.gets.chomp
-
+  print "Portlet ID (default: #{default_portlet_id}): " unless force_defaults
+  portlet_id = force_defaults ? '' : $stdin.gets.chomp
   portlet_id = default_portlet_id if portlet_id.empty?
 
   portlet = PortletGenerator::Portlet.new({ name: class_name, title: portlet_title, id: portlet_id })
