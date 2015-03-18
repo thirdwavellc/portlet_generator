@@ -7,15 +7,24 @@ require_relative '../lib/portlet_generator/generator'
 FileUtils.rm_rf '../output'
 
 command = ARGV[0]
+default_class_name = ARGV[1]
+if default_class_name
+  default_portlet_title = default_class_name.split(/(?=[A-Z])/).join(' ')
+end
 
 case command
 when 'generate', 'g'
   puts 'Portlet Generator'
 
-  print 'Portlet Title: '
+  if default_portlet_title
+    print "Portlet Title (default: #{default_portlet_title}): "
+  else
+    print 'Portlet Title: '
+  end
   portlet_title = $stdin.gets.chomp
+  portlet_title = default_portlet_title if portlet_title.empty?
 
-  default_class_name = portlet_title.gsub(' ', '')
+  default_class_name ||= portlet_title.gsub(' ', '')
   default_portlet_id = portlet_title.downcase.gsub(' ', '-')
 
   print "Class Name (default: #{default_class_name}): "
