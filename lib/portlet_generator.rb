@@ -8,6 +8,9 @@ require 'portlet_generator/portlet'
 require 'portlet_generator/portlet_id_context'
 require 'portlet_generator/portlet_id_portlet'
 require 'portlet_generator/portlet_xml'
+require 'portlet_generator/portlet_css_main'
+require 'portlet_generator/portlet_js_main'
+require 'portlet_generator/portlet_template_index'
 require 'portlet_generator/version'
 
 module PortletGenerator
