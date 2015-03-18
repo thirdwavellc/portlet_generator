@@ -1,31 +1,24 @@
-require 'erb'
+require_relative 'file_renderer'
 require 'fileutils'
 
 module PortletGenerator
-  class LanguageFile
-    attr_reader :name, :generator
-
-    def initialize(generator)
-      @name = generator.name
-      @generator = generator
-    end
-
+  class LanguageFile < FileRenderer
     def generate
       make_portlet_dir
-      renderer = ERB.new(template)
-      File.open(language_file, 'w') { |f| f.write renderer.result(generator.get_binding) }
+
+      super
     end
 
     def template
       File.read(File.expand_path('templates/Language.properties.erb', __dir__))
     end
 
-    def portlet_dir
-      "src/main/resources/content/#{generator.portlet.name}"
+    def target_file
+      "#{portlet_dir}/Language.properties"
     end
 
-    def language_file
-      "#{portlet_dir}/Language.properties"
+    def portlet_dir
+      "src/main/resources/content/#{generator.portlet.name}"
     end
 
     private

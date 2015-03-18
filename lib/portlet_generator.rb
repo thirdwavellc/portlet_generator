@@ -1,4 +1,5 @@
 require 'portlet_generator/controller'
+require 'portlet_generator/file_renderer'
 require 'portlet_generator/generator'
 require 'portlet_generator/language_file'
 require 'portlet_generator/liferay_portlet_xml'
