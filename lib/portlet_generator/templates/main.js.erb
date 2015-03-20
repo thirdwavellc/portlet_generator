@@ -1,0 +1,4 @@
+angular.module('<%= @portlet.name %>', [])
+  .controller('IndexController', ['$scope', function($scope) {
+  }]);
+angular.bootstrap('.<%= @portlet.id %>', ['<%= @portlet.name %>']);
