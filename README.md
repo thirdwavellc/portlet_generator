@@ -22,6 +22,30 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+## Action Outline
+
+The following outlines the general approach to file creation that is accomplished in this generator
+
+### Create New Controller
+/src/main/java/com/crescendo/portal/ui/ctrl/{ClassName}.java
+
+### Create a Language File
+/src/main/resources/content/{ClassName}/Language.properties
+
+### Create Portlet Context
+/src/main/webapp/WEB-INF/{portlet-id}-portlet.xml
+
+### Create Servlet Context
+/src/main/webapp/WEB-INF/{portlet-id}-context.xml
+
+### Add XML Portlet Nodes in each of the following three files
+/src/main/webapp/WEB-INF/liferay-portlet.xml
+/src/main/webapp/WEB-INF/liferay-display.xml
+src/main/webapp/WEB-INF/portlet.xml
+
+### Add UI File set for each portlet under 
+/src/main/webapp/templates/{ClassName}
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/portlet_generator/fork )
